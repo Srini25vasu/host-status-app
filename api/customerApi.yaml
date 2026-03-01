@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: Customer API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+tags:
+  - name: Customers
+    description: Operations related to customers
+paths:
+  /customers:
+    get:
+      description: Get all customers
+      summary: Get all customers
+      #OpenAPI FeignClient
+      # security:
+      #   - bearerAuth: []
+      operationId: findAllCustomers
+      tags: [Customers]
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '422':
+          description: Unprocessable Entity
+          headers:
+            ExceptionType:
+              description: Class name of Exception thrown
+              style: simple
+              schema:
+                type: string
+            ResponseType:
+              description: Class name of Response returned
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          example: 1
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example:
+        contactNo:
+          type: number
+          example: 123457890
+    ErrorResponse:
+      type: object
+      description: ""
+      properties:
+        traceId:
+          type: string
+          description: "abc123xyz"
+        message:
+          type: string
+          example: "Invalid request"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2024-01-01T12:00:00Z"
+        errorResponseType:
+          $ref: '#/components/schemas/ErrorResponseType'
+    ErrorResponseType:
+      type: string
+      description: ""
+      enum:
+        - "BadRequestResponse"
+        - "UnauthorizedResponse"
+        - "ForbiddenResponse"
+        - "NotFoundResponse"
+        - "ConflictResponse"
+        - "InternalServerErrorResponse"
+        - "ServiceUnavailableResponse"
+        - "TECHNICAL_ERROR"
+        - "UNKNOWN_ERROR"
+        - "BUSINESS_ERROR"
