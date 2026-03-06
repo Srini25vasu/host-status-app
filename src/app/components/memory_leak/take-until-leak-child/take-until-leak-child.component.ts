@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TakeUntilLeakChildService } from '../../../services/take-until-leak-child.service';
-import { BehaviorSubject, mergeMap, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, finalize, mergeMap, Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-take-until-leak-child',
@@ -24,16 +24,21 @@ export class TakeUntilLeakChildComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.counterA$.pipe(
       mergeMap((value) => { return this.counterB$ }),
-      takeUntil(this.destroySubject)
+      takeUntil(this.destroySubject),
+      finalize(() => console.log('Counter A completed'))
+
     ).subscribe(value => console.log('Counter A:', value));
     this.counterB$.pipe(
       takeUntil(this.destroySubject),
       mergeMap((value) => { return this.counterA$ }),
+      finalize(() => console.log('Counter B completed'))
     ).subscribe(value => console.log('Counter B:', value));
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    console.log('Child component destroyed');
+    this.destroySubject.next(true);
+    this.destroySubject.complete();
   }
 }
 

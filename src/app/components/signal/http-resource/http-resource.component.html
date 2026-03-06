@@ -1,0 +1,6 @@
+<label for="person-id">ID</label>
+<input id="person-id" #personId [value]="id()" (input)="id.set(+personId.value)" type="number">
+  <pre>{{personResource.value() | json}}</pre>
+  @if(personResource.error()) {
+    <pre class="error">{{personResource.error() | json}}</pre>
+  }
