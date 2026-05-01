@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
+import { Customer } from '../models/customer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-
-  constructor(private httpClient: HttpClient) { }
+  private readonly httpClient = inject(HttpClient);
 
   //Pitfall #2 - avoid duplicate HTTP calls: use shareReplay()
   //https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/
-  getCustomers(): Observable<any> {
+  getCustomers(): Observable<Customer[]> {
     // Using relative URL - proxy will forward to http://localhost:8082
-    return this.httpClient.get('/api/customers').pipe(
+    return this.httpClient.get<Customer[]>('/api/customers').pipe(
       shareReplay()
     );
   }

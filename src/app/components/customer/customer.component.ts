@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subject, Subscription } from 'rxjs';
 import { CardComponent } from "../../shared/components/ui/card/card.component";
 import { CustomerStore } from '../../store/customer-store';
 import { Customer } from '../../models/customer';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer',
@@ -12,19 +10,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })
-export class CustomerComponent implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject();
-  isLoading: boolean = true;
+export class CustomerComponent implements OnInit {
+  private readonly customerStore = inject(CustomerStore);
+
+  isLoading = true;
   customers: Customer[] = [];
-  private readonly subscription: Subscription = new Subscription();
 
-  constructor(
-    private readonly customerStore: CustomerStore,
-    private readonly route: ActivatedRoute
-
-  ) {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('CustomerComponent ngOnInit called');
     this.isLoading = true;
 
@@ -40,9 +32,5 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

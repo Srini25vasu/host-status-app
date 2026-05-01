@@ -2,18 +2,23 @@
 <app-card title="Customer Information" subtitle="List of Customers">
 
   <div card-body>
-    <div *ngIf="customers.length === 0" class="text-muted">
-      Loading customers...
-    </div>
-    <div *ngIf="customers.length > 0">
-      <ul class="list-unstyled">
-        <li *ngFor="let customer of customers" class="mb-2 p-2 border rounded">
-          <strong>{{ customer.firstName }} {{ customer.lastName }}</strong><br>
-          <small class="text-muted">{{ customer.email }}</small><br>
-
-        </li>
-      </ul>
-    </div>
+    @if (customers.length === 0) {
+      <div class="text-muted">
+        Loading customers...
+      </div>
+    }
+    @if (customers.length > 0) {
+      <div>
+        <ul class="list-unstyled">
+          @for (customer of customers; track customer.id) {
+            <li class="mb-2 p-2 border rounded">
+              <strong>{{ customer.firstName }} {{ customer.lastName }}</strong><br>
+              <small class="text-muted">{{ customer.email }}</small><br>
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </div>
   <div card-footer>
     app powered by Angular

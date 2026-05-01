@@ -1,9 +1,13 @@
 <div class="card" [ngClass]="cardClass">
   <div class="card-header" [ngClass]="headerClass">
-    <ng-container *ngIf="title || subtitle">
-      <h3 *ngIf="title" class="card-title">{{ title }}</h3>
-      <p *ngIf="subtitle" class="card-subtitle">{{ subtitle }}</p>
-    </ng-container>
+    @if (title || subtitle) {
+      @if (title) {
+        <h3 class="card-title">{{ title }}</h3>
+      }
+      @if (subtitle) {
+        <p class="card-subtitle">{{ subtitle }}</p>
+      }
+    }
     <ng-content select="[card-header]"></ng-content>
   </div>
   <div class="card-body" [ngClass]="bodyClass">

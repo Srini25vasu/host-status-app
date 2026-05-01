@@ -7,6 +7,4 @@ import { interval } from 'rxjs';
 export class TakeUntilLeakChildService {
   counterA$ = interval(2000)
   counterB$ = interval(1000)
-
-  constructor() { }
 }

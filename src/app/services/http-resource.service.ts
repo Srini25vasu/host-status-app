@@ -6,8 +6,6 @@ import { z } from 'zod';
   providedIn: 'root'
 })
 export class HttpResourceService {
-
-  constructor() { }
  // https://stackblitz.com/edit/angular-resource-zod-blog?file=src%2Fmain.ts
   getPersonResource(userId: () => string | undefined) {
     return httpResource(

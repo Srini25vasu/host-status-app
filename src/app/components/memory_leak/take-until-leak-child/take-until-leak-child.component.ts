@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { TakeUntilLeakChildService } from '../../../services/take-until-leak-child.service';
-import { BehaviorSubject, finalize, mergeMap, Observable, Subject, takeUntil } from 'rxjs';
+import { finalize, mergeMap, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-take-until-leak-child',
@@ -16,21 +16,23 @@ export class TakeUntilLeakChildComponent implements OnInit, OnDestroy {
 
   destroySubject = new Subject();
 
-  constructor(private readonly takeUntilLeakChildService: TakeUntilLeakChildService) {
+  private readonly takeUntilLeakChildService = inject(TakeUntilLeakChildService);
+
+  constructor() {
     this.counterA$ = this.takeUntilLeakChildService.counterA$;
     this.counterB$ = this.takeUntilLeakChildService.counterB$;
   }
 
   ngOnInit(): void {
     this.counterA$.pipe(
-      mergeMap((value) => { return this.counterB$ }),
+      mergeMap(() => this.counterB$),
       takeUntil(this.destroySubject),
       finalize(() => console.log('Counter A completed'))
 
     ).subscribe(value => console.log('Counter A:', value));
     this.counterB$.pipe(
       takeUntil(this.destroySubject),
-      mergeMap((value) => { return this.counterA$ }),
+      mergeMap(() => this.counterA$),
       finalize(() => console.log('Counter B completed'))
     ).subscribe(value => console.log('Counter B:', value));
   }

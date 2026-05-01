@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { CardComponent } from './card.component';
@@ -17,12 +17,12 @@ import { CardComponent } from './card.component';
   `
 })
 class TestHostComponent {
-  title: string = '';
-  subtitle: string = '';
-  cardClass: string = '';
-  headerClass: string = '';
-  bodyClass: string = '';
-  footerClass: string = '';
+  title = '';
+  subtitle = '';
+  cardClass = '';
+  headerClass = '';
+  bodyClass = '';
+  footerClass = '';
 }
 
 describe('CardComponent', () => {

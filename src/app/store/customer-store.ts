@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, shareReplay, of } from "rxjs";
 import { CustomerService } from "../services/customer.service";
 import { Customer } from "../models/customer";
@@ -14,12 +14,13 @@ const GLOBAL_CACHE = {
   providedIn: 'root'
 })
 export class CustomerStore {
+  private readonly customerService = inject(CustomerService);
   private _customers: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>(GLOBAL_CACHE.customers);
   private _instanceId = Math.random().toString(36).substr(2, 9);
 
   public readonly customers$ = this._customers.asObservable();
 
-  constructor(private customerService: CustomerService) {
+  constructor() {
     console.log(`CustomerStore constructor called - Instance ID: ${this._instanceId}`);
     console.log(`Global cache has ${GLOBAL_CACHE.customers.length} customers`);
 
