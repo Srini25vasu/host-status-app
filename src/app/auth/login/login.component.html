@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div class="card text-center">
+  <div class="card-header text-bg-info">
+    Blog platform
+  </div>
+  <div class="card-body">
+    <h5 class="card-title mb-4">Login</h5>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="mb-3">
+        <label for="username" class="form-label visually-hidden">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          formControlName="username"
+          placeholder="Username or Email"
+          [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+        @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+          <div class="invalid-feedback">
+            Username is required (max 6 characters)
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label visually-hidden">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+          [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="invalid-feedback">
+            Password is required (max 6 characters)
+          </div>
+        }
+      </div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!loginForm.valid">
+        Sign In
+      </button>
+    </form>
+  </div>
+  <div class="card-footer text-body-secondary">
+    <a href="#" class="text-decoration-none">Forgot Password?</a>
+  </div>
+</div>

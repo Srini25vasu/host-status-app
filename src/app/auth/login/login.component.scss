@@ -1,0 +1,77 @@
+.card {
+  // Default mobile-first approach
+  width: 100% !important;
+  max-width: 280px !important;
+  min-height: 350px;
+
+  // Tablet screens (768px and up)
+  @media (min-width: 768px) {
+    width: 300px !important;
+    max-width: 300px !important;
+    min-height: 400px;
+  }
+
+  // Desktop screens (992px and up)
+  @media (min-width: 992px) {
+    width: 400px !important;
+    max-width: 400px !important;
+    min-height: 420px;
+  }
+
+  // Ensure card body uses available space
+  .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+
+    // Form styling
+    form {
+      .form-control {
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        font-size: 0.9rem;
+
+        &:focus {
+          border-color: #0d6efd;
+          box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+      }
+
+      .invalid-feedback {
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+
+  // Button styling
+  .btn {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+
+  .card-footer {
+    padding: 1rem;
+
+    a {
+      font-size: 0.9rem;
+      color: #6c757d;
+
+      &:hover {
+        color: #0d6efd;
+      }
+    }
+  }
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
