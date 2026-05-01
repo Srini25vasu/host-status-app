@@ -1,6 +1,10 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 readme_backup.txt
+
+# Auto-generated code
+src/app-gen/
+
 # Compiled output
 /dist
 /tmp
