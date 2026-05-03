@@ -1,4 +1,4 @@
-# Host Status App
+# Booking App
 
 A comprehensive Angular 19 application for managing bookings, trips, and vehicle services with integrated OAuth2 social media authentication.
 

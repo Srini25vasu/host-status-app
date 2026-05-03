@@ -4,6 +4,19 @@
   </div>
   <div class="card-body">
     <h5 class="card-title mb-4">Login</h5>
+
+    <!-- OAuth2 Login Section -->
+    <div class="mb-4">
+      <button type="button" class="btn btn-danger w-100 mb-2" (click)="loginWithOAuth2()">
+        <i class="fab fa-google me-2"></i>Sign in with Google
+      </button>
+      <small class="text-muted">Secure login using OAuth2</small>
+    </div>
+
+    <hr class="my-4">
+    <p class="text-muted small">Or use form login (demo)</p>
+
+    <!-- Form Login Section -->
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="mb-3">
         <label for="username" class="form-label visually-hidden">Username</label>

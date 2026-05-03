@@ -20,6 +20,10 @@ export const routes: Routes = [
       {path: 'create', component: CreateComponent},
       {path: 'detail/:id', component: DetailComponent},
     ],
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard]
+  },
+  { path: 'customers/:id', component: DetailComponent,
     canActivate: [AuthGuard]
   },
   { path: 'memory-leak', component: TakeUntilLeakChildComponent },
