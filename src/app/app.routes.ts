@@ -8,6 +8,8 @@ import { EditComponent } from './features/customers/edit/edit.component';
 import { CreateComponent } from './features/customers/create/create.component';
 import { DetailComponent } from './features/customers/detail/detail.component';
 import { AuthGuard } from './guards/auth.guard';
+import { DemoComponent } from './components/signal/demo/demo.component';
+import { VehiclesComponent } from './features/vehicles/vehicles.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,12 +22,15 @@ export const routes: Routes = [
       {path: 'create', component: CreateComponent},
       {path: 'detail/:id', component: DetailComponent},
     ],
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard]
+    //canActivate: [AuthGuard],
+    //canActivateChild: [AuthGuard]
   },
   { path: 'customers/:id', component: DetailComponent,
     canActivate: [AuthGuard]
   },
   { path: 'memory-leak', component: TakeUntilLeakChildComponent },
   { path: 'http-resource', component: HttpResourceComponent },
+  { path: 'signals', component: DemoComponent },
+  { path: 'vehicles', component: VehiclesComponent },
+  { path: '**', redirectTo: '/home' }
 ];

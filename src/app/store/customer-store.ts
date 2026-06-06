@@ -51,9 +51,8 @@ export class CustomerStore {
     GLOBAL_CACHE.loading = true;
 
     // Cache the observable globally to prevent multiple HTTP requests
-    GLOBAL_CACHE.loadingPromise = this.customerService.getCustomers().pipe(
-      shareReplay(1)
-    );
+    // define the operators using pipe pattern. They will be executed when the observable is subscribed
+    GLOBAL_CACHE.loadingPromise = this.customerService.getCustomers();
 
     console.log('About to subscribe to HTTP request');
     GLOBAL_CACHE.loadingPromise.subscribe({

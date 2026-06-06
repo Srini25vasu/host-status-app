@@ -10,7 +10,7 @@
         <ul class="list-unstyled">
           @for (customer of customers; track customer.id) {
             <li class="mb-2 p-2 border rounded">
-              <strong>{{ customer.firstName }} {{ customer.lastName }}</strong><br>
+              <strong>{{ customer.firstName }} {{ customer.lastName }} <button type="button" class="btn btn-sm btn-primary float-end" (click)="onEdit(customer)">Edit</button></strong><br>
               <small class="text-muted">{{ customer.email }}</small><br>
             </li>
           }

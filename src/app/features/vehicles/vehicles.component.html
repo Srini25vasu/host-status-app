@@ -1,0 +1,30 @@
+<app-card title="Vehicles" subtitle="List of Vehicles">
+  <div card-body>
+    @if (Vehicles.length === 0) {
+      <div class="text-muted">
+        Loading vehicles...
+      </div>
+    }
+    @if (Vehicles.length > 0) {
+      <div>
+        <ul class="list-unstyled">
+          @for (vehicle of Vehicles; track vehicle.id) {
+            <li class="mb-2 p-2 border rounded">
+              <strong>{{ vehicle.model }} </strong><br>
+              <small class="text-muted">User name: {{ vehicle.userName }}</small><br>
+              <small class="text-muted">Make:{{ vehicle.make }}</small><br>
+               <small class="text-muted">Color: {{ vehicle.color }}</small><br>
+                <small class="text-muted">Status: {{ vehicle.status }}</small><br>
+                <small class="text-muted">Latitude: {{ vehicle.latitude }}</small><br>
+                <small class="text-muted">Longitude: {{ vehicle.longitude }}</small><br>
+                <small class="text-muted">Battery level: {{ vehicle.batteryLevel }}</small> <button type="button" class="btn btn-sm btn-primary float-end">Edit</button><br>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+  <div card-footer>
+    car-sharing-app
+  </div>
+</app-card>

@@ -34,4 +34,9 @@ export class CustomerComponent implements OnInit {
       }
     });
   }
+
+  //https://angular.dev/guide/routing/navigate-to-routes
+  protected onEdit(customer: Customer) {
+    console.log('Edit customer:', customer);
+  }
 }
