@@ -43,4 +43,8 @@ export class VehicleStore {
       })
     );
   }
+
+  findById(id: number): Observable<Vehicle> {
+    return this.vehicleService.findById(id);
+  }
 }

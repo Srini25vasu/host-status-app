@@ -1,0 +1,31 @@
+<app-card title="Vehicle" subtitle="Details">
+  <div card-body>
+    @if (errorMessage) {
+      <div class="text-danger">
+        {{ errorMessage }}
+      </div>
+    }
+    @if (isLoading && !errorMessage) {
+      <div class="text-muted">
+        Loading vehicle...
+      </div>
+    }
+    @if (vehicle) {
+      <div>
+        <strong>Model: </strong> {{ vehicle.model }}<br>
+        <strong>Make: </strong> {{ vehicle.make }}<br>
+        <strong>Color: </strong> {{ vehicle.color }}<br>
+        <strong>Latitude: </strong> {{ vehicle.latitude }}<br>
+        <strong>Longitude: </strong> {{ vehicle.longitude }}<br>
+        <strong>Battery level: </strong> {{ vehicle.batteryLevel }}<br>
+        <strong>Status: </strong> {{ vehicle.status }}<br>
+      </div>
+    }
+    @if (!vehicle && !isLoading && !errorMessage) {
+      <div class="text-muted">
+        Vehicle details are not available.
+      </div>
+    }
+  </div>
+
+</app-card>

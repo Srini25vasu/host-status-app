@@ -1,5 +1,6 @@
 <app-card title="Vehicles" subtitle="List of Vehicles">
   <div card-body>
+    <button type="button" class="btn btn-sm btn-primary float-end">add</button>
     @if (Vehicles.length === 0) {
       <div class="text-muted">
         Loading vehicles...
@@ -17,7 +18,7 @@
                 <small class="text-muted">Status: {{ vehicle.status }}</small><br>
                 <small class="text-muted">Latitude: {{ vehicle.latitude }}</small><br>
                 <small class="text-muted">Longitude: {{ vehicle.longitude }}</small><br>
-                <small class="text-muted">Battery level: {{ vehicle.batteryLevel }}</small> <button type="button" class="btn btn-sm btn-primary float-end">Edit</button><br>
+                <small class="text-muted">Battery level: {{ vehicle.batteryLevel }}</small> <button type="button" class="btn btn-sm btn-primary float-end" (click)="onEdit(vehicle)">Edit</button><br>
             </li>
           }
         </ul>

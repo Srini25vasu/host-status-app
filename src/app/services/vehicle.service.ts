@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable, catchError, finalize, firstValueFrom, from, of, tap } from 'rxjs';
+import { Observable, finalize, firstValueFrom, from, of, tap } from 'rxjs';
 import { Vehicle } from '../models/vehicle.model';
 
 @Injectable({
@@ -71,5 +71,9 @@ export class VehicleService {
         this.vehiclesCache.set(this.vehiclesCache().filter((vehicle: Vehicle) => vehicle.id !== id));
       })
     );
+  }
+
+  findById(id: number): Observable<Vehicle> {
+    return this.httpClient.get<Vehicle>(this.url + '/' + id);
   }
 }

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { VehicleStore } from '../../store/vehicle-store';
 import { Vehicle } from '../../models/vehicle.model';
 import { CardComponent } from "../../shared/components/ui/card/card.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicles',
@@ -11,6 +12,7 @@ import { CardComponent } from "../../shared/components/ui/card/card.component";
 })
 export class VehiclesComponent implements OnInit {
   private readonly vehicleStore = inject(VehicleStore);
+  private readonly router = inject(Router);
 
   vehicles$ = this.vehicleStore.vehicles$;
   Vehicles: Vehicle[] = [];
@@ -28,5 +30,13 @@ export class VehiclesComponent implements OnInit {
       }
     }
     );
+  }
+
+  onEdit(vehicle: Vehicle) {
+    this.router.navigateByUrl(`/vehicles/edit/${vehicle.id}`, {
+      state: {
+        vehicle: vehicle
+      }
+    });
   }
 }
