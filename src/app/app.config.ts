@@ -8,11 +8,14 @@ import { UserToken, Permissions } from './core/auth/auth.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    // Collapses multiple events/microtasks into fewer change detection cycles.
+    provideZoneChangeDetection({
+      eventCoalescing: true,
+      runCoalescing: true
+    }),
     provideRouter(routes),
     provideHttpClient(),
     { provide: UserToken, useValue: { id: '123456', token: 'hdhsjsj' } },
-    Permissions,
-    //provideOAuthClient(),
+    Permissions
   ]
 };

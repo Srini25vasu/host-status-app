@@ -47,4 +47,8 @@ export class VehicleStore {
   findById(id: number): Observable<Vehicle> {
     return this.vehicleService.findById(id);
   }
+
+  searchVehicles(query: string): Observable<Vehicle[]> {
+    return this.vehicleService.searchVehicles(query);
+  }
 }

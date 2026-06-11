@@ -4,5 +4,11 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/services": {
+    "target": "http://127.0.0.1:9180",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

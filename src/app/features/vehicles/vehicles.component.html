@@ -1,9 +1,16 @@
+<div>
+  <input [formControl]="searchControl" placeholder="Search vehicles.." />
+</div>
 <app-card title="Vehicles" subtitle="List of Vehicles">
   <div card-body>
     <button type="button" class="btn btn-sm btn-primary float-end">add</button>
     @if (Vehicles.length === 0) {
       <div class="text-muted">
-        Loading vehicles...
+        @if ((searchControl.value ?? '').trim().length > 0) {
+          No vehicles found for this search.
+        } @else {
+          Loading vehicles...
+        }
       </div>
     }
     @if (Vehicles.length > 0) {

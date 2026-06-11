@@ -1,0 +1,17 @@
+<app-signal-config-panel
+ [theme]="theme()"
+ [userRole]="userRole()"
+ [region]="region()"
+ [featureFlags]="featureFlags()"
+>
+</app-signal-config-panel>
+
+<app-card title="Dashboard" subtitle="Using Signals">
+  <div card-body>
+      @if (configPanel()?.isAdminView()) {
+        Dashboard Admin View
+      } @else {
+        Dashboard user view
+      }
+  </div>
+</app-card>

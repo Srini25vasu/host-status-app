@@ -12,6 +12,7 @@ import { DemoComponent } from './components/signal/demo/demo.component';
 import { VehiclesComponent } from './features/vehicles/vehicles.component';
 import { EditComponent as VehicleEditComponent } from './features/vehicles/edit/edit.component';
 import { CreateComponent as VehicleCreateComponent } from './features/vehicles/create/create.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -36,5 +37,6 @@ export const routes: Routes = [
   { path: 'vehicles', component: VehiclesComponent },
   { path: 'vehicles/create', component: VehicleCreateComponent },
   { path: 'vehicles/edit/:id', component: VehicleEditComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: '/home' }
 ];

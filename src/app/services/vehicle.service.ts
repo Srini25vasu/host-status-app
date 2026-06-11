@@ -76,4 +76,8 @@ export class VehicleService {
   findById(id: number): Observable<Vehicle> {
     return this.httpClient.get<Vehicle>(this.url + '/' + id);
   }
+
+  searchVehicles(query: string): Observable<Vehicle[]> {
+    return this.httpClient.get<Vehicle[]>(this.url + '/query?searchTerm=' + query);
+  }
 }

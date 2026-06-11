@@ -1,0 +1,20 @@
+<app-card title="Admin Panel Configuration" subtitle="Using Signal">
+  <div card-header>
+    Admin Panel
+  </div>
+  <div card-body>
+    <ul>
+      <li>
+        @if (isAdminView()) {
+          Admin View
+        } @else {
+          User View
+        }
+      </li>
+      <li> Theme: @if (isDarkTheme()) { Dark } @else { Light }</li>
+      <li> Feature Flags: @if (showExperimental()) { Enabled } @else { Disabled }</li>
+      <li> Region: @if (regionSupportsFeatureX()) { Supported } @else { Not Supported }</li>
+    </ul>
+
+  </div>
+</app-card>

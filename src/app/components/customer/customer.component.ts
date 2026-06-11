@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { CardComponent } from "../../shared/components/ui/card/card.component";
 import { CustomerStore } from '../../store/customer-store';
 import { Customer } from '../../models/customer';
+import { CustomerListComponent } from "./customer-list/customer-list.component";
 
 @Component({
   selector: 'app-customer',
-  imports: [CommonModule, CardComponent, RouterOutlet],
+  imports: [CommonModule,  RouterOutlet, CustomerListComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })

@@ -14,7 +14,7 @@ export class CustomerService {
   //define the operators using pipe pattern. They will be executed when the observable is subscribed
   getCustomers(): Observable<Customer[]> {
     // Using relative URL - proxy will forward to http://localhost:8082
-    return this.httpClient.get<Customer[]>('/api/customers').pipe(
+    return this.httpClient.get<Customer[]>('/services/api/customers').pipe(
       shareReplay()
     );
   }
