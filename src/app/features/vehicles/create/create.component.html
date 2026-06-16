@@ -1,1 +1,132 @@
-<p>create works!</p>
+<div class="create-form">
+  <form [formGroup]="vehicleForm" (ngSubmit)="onCreate()">
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label for="userName" class="form-label">User Name</label>
+        <input type="text" id="userName" class="form-control" [class.is-invalid]="isFieldInvalid('userName')"
+          formControlName="userName" placeholder="Enter user name">
+        @if (isFieldInvalid('userName')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('userName') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="model" class="form-label">Model</label>
+        <input type="text" id="model" class="form-control" [class.is-invalid]="isFieldInvalid('model')"
+          formControlName="model" placeholder="Enter model">
+        @if (isFieldInvalid('model')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('model') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="make" class="form-label">Make</label>
+        <input type="text" id="make" class="form-control" [class.is-invalid]="isFieldInvalid('make')"
+          formControlName="make" placeholder="Enter make">
+        @if (isFieldInvalid('make')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('make') }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label for="licensePlate" class="form-label">License Plate</label>
+        <input type="text" id="licensePlate" class="form-control" [class.is-invalid]="isFieldInvalid('licensePlate')"
+          formControlName="licensePlate" placeholder="Enter license plate">
+        @if (isFieldInvalid('licensePlate')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('licensePlate') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="year" class="form-label">Year</label>
+        <input type="text" id="year" class="form-control" [class.is-invalid]="isFieldInvalid('year')"
+          formControlName="year" placeholder="Enter year (YYYY)">
+        @if (isFieldInvalid('year')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('year') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="color" class="form-label">Color</label>
+        <input type="text" id="color" class="form-control" [class.is-invalid]="isFieldInvalid('color')"
+          formControlName="color" placeholder="Enter color">
+        @if (isFieldInvalid('color')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('color') }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label for="status" class="form-label">Status</label>
+        <input type="text" id="status" class="form-control" [class.is-invalid]="isFieldInvalid('status')"
+          formControlName="status" placeholder="Enter status">
+        @if (isFieldInvalid('status')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('status') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="batteryLevel" class="form-label">Battery Level (%)</label>
+        <input type="number" id="batteryLevel" class="form-control" [class.is-invalid]="isFieldInvalid('batteryLevel')"
+          formControlName="batteryLevel" placeholder="0-100">
+        @if (isFieldInvalid('batteryLevel')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('batteryLevel') }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label for="latitude" class="form-label">Latitude</label>
+        <input type="text" id="latitude" class="form-control" [class.is-invalid]="isFieldInvalid('latitude')"
+          formControlName="latitude" placeholder="Enter latitude">
+        @if (isFieldInvalid('latitude')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('latitude') }}
+          </div>
+        }
+      </div>
+      <div class="col">
+        <label for="longitude" class="form-label">Longitude</label>
+        <input type="text" id="longitude" class="form-control" [class.is-invalid]="isFieldInvalid('longitude')"
+          formControlName="longitude" placeholder="Enter longitude">
+        @if (isFieldInvalid('longitude')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('longitude') }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="vehicleForm.invalid">
+          Create Vehicle
+        </button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="router.navigateByUrl('/vehicles')">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+@if (vehicleForm.invalid && vehicleForm.touched) {
+  <div class="alert alert-warning mt-3 ms-3">
+    Please fix the validation errors above to create a vehicle.
+  </div>
+}

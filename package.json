@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:vehicle": "ng test --ts-config tsconfig.vehicle.spec.json --include src/app/services/vehicle.service.spec.ts --watch=false",
     "api:generate:customerApi": "npx openapi-generator-cli generate -i api/customerApi.yaml -g typescript-angular -o src/app-gen/api/customer-service",
     "postinstall": "npm run api:generate:customerApi",
     "lint": "ng lint"

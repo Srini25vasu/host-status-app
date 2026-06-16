@@ -29,7 +29,7 @@ export const routes: Routes = [
     //canActivateChild: [AuthGuard]
   },
   { path: 'customers/:id', component: DetailComponent,
-    canActivate: [AuthGuard]
+   // canActivate: [AuthGuard]
   },
   { path: 'memory-leak', component: TakeUntilLeakChildComponent },
   { path: 'http-resource', component: HttpResourceComponent },

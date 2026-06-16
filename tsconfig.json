@@ -5,6 +5,20 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "rootDir": "./src",
+    "paths": {
+      "@ui": [
+        "./src/app/shared/components/ui"
+      ],
+      "@ui/*": [
+        "./src/app/shared/components/ui/*"
+      ],
+      "shared/ui/components/ui": [
+        "./src/app/shared/components/ui"
+      ],
+      "shared/ui/components/ui/*": [
+        "./src/app/shared/components/ui/*"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,

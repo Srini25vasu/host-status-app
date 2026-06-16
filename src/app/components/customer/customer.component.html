@@ -1,3 +1,15 @@
+<div>
+  <app-toaster
+    [visible]="toastVisible"
+    [title]="toastTitle"
+    [message]="toastMessage"
+    [timestamp]="toastTimestamp"
+    [autohide]="true"
+    [delay]="3000"
+    (closed)="onToastClosed()"
+
+  />
+</div>
 <app-customer-list [customers]="customers"></app-customer-list>
 <!-- Router outlet for child routes (edit, create, detail) -->
 <router-outlet></router-outlet>

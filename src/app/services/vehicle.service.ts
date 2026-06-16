@@ -32,12 +32,30 @@ export class VehicleService {
     );
 
     return from(this.vehiclesLoadPromise).pipe(
+      //https://rxjs.dev/api/operators/finalize
       finalize(() => {
         this.vehiclesLoadPromise = null;
       }),
 
     );
   }
+
+  /**
+   *
+   * @param vehicle
+   */
+  create(vehicle: Omit<Vehicle, 'id'>): Observable<Vehicle> { // omit id from Vehicle): void {
+    return this.httpClient.post<Vehicle>(this.url, vehicle).pipe(
+      tap((createdVehicle: Vehicle) => {
+        if (!this.hasLoadedVehicles) {
+          return;
+        }
+
+        this.vehiclesCache.set([...this.vehiclesCache(), createdVehicle]);
+      })
+    );
+  }
+
 
   updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
     return this.httpClient.put<Vehicle>(this.url, vehicle).pipe(

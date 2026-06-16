@@ -1,9 +1,18 @@
 <div>
   <input [formControl]="searchControl" placeholder="Search vehicles.." />
+  <app-toaster
+    [visible]="toastVisible"
+    [title]="toastTitle"
+    [message]="toastMessage"
+    [timestamp]="toastTimestamp"
+    [autohide]="true"
+    [delay]="3000"
+    (closed)="onToastClosed()"
+  ></app-toaster>
 </div>
 <app-card title="Vehicles" subtitle="List of Vehicles">
   <div card-body>
-    <button type="button" class="btn btn-sm btn-primary float-end">add</button>
+    <button type="button" class="btn btn-sm btn-primary float-end" (click)="onCreate()">add</button>
     @if (Vehicles.length === 0) {
       <div class="text-muted">
         @if ((searchControl.value ?? '').trim().length > 0) {

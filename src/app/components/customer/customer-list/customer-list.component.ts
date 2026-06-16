@@ -1,10 +1,12 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { Customer } from '../../../models/customer';
 import { CardComponent } from '../../../shared/components/ui/card/card.component';
+//import { TableComponent } from "../../../shared/components/ui/table/table.component";
 
 // Example: https://www.codemag.com/Article/2511041/Angular-Signals-in-the-Real-World-Smarter-Inputs-and-Reactive-Routing
 @Component({
   selector: 'app-customer-list',
+  standalone: true,
   imports: [CardComponent],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss',

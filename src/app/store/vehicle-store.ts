@@ -17,6 +17,13 @@ export class VehicleStore {
     );
   }
 
+  create(vehicle: Omit<Vehicle, 'id'>): void {
+    this.vehicleService.create(vehicle).pipe(
+      tap((createdVehicle: Vehicle) => this._vehicles.next([...this._vehicles.getValue(), createdVehicle]))
+    );
+  }
+
+
   updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
     return this.vehicleService.updateVehicle(vehicle).pipe(
       tap((updatedVehicle: Vehicle) => {
