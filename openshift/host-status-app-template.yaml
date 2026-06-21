@@ -1,0 +1,135 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: host-status-app
+  labels:
+    app.kubernetes.io/name: ${APP_NAME}
+    app.kubernetes.io/part-of: ${APP_NAME}
+parameters:
+  - name: APP_NAME
+    displayName: Application Name
+    description: Name used for OpenShift objects.
+    value: host-status-app
+    required: true
+  - name: APP_NAMESPACE
+    displayName: Namespace
+    description: Target OpenShift namespace/project.
+    value: dev
+    required: true
+  - name: IMAGE_REGISTRY
+    displayName: Image Registry
+    description: Docker registry host.
+    value: docker.io
+    required: true
+  - name: IMAGE_REPOSITORY
+    displayName: Image Repository
+    description: Repository path in registry.
+    value: your-dockerhub-user/host-status-app
+    required: true
+  - name: IMAGE_TAG
+    displayName: Image Tag
+    description: Image tag to deploy.
+    value: latest
+    required: true
+  - name: REPLICAS
+    displayName: Replicas
+    description: Number of pod replicas.
+    value: "1"
+    required: true
+  - name: CONTAINER_PORT
+    displayName: Container Port
+    description: Port exposed by nginx container.
+    value: "8080"
+    required: true
+  - name: ROUTE_HOST
+    displayName: Route Host
+    description: Optional custom hostname for route.
+    required: false
+
+objects:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: ${APP_NAME}
+      namespace: ${APP_NAMESPACE}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      replicas: ${REPLICAS}
+      revisionHistoryLimit: 2
+      selector:
+        matchLabels:
+          app: ${APP_NAME}
+      strategy:
+        type: RollingUpdate
+      template:
+        metadata:
+          labels:
+            app: ${APP_NAME}
+        spec:
+          containers:
+            - name: ${APP_NAME}
+              image: ${IMAGE_REGISTRY}/${IMAGE_REPOSITORY}:${IMAGE_TAG}
+              imagePullPolicy: Always
+              ports:
+                - containerPort: ${CONTAINER_PORT}
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: ${CONTAINER_PORT}
+                initialDelaySeconds: 5
+                periodSeconds: 10
+                timeoutSeconds: 3
+                failureThreshold: 6
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: ${CONTAINER_PORT}
+                initialDelaySeconds: 20
+                periodSeconds: 15
+                timeoutSeconds: 3
+                failureThreshold: 6
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${APP_NAME}
+      namespace: ${APP_NAMESPACE}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      selector:
+        app: ${APP_NAME}
+      ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: ${CONTAINER_PORT}
+
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: ${APP_NAME}
+      namespace: ${APP_NAMESPACE}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      host: ${ROUTE_HOST}
+      to:
+        kind: Service
+        name: ${APP_NAME}
+        weight: 100
+      port:
+        targetPort: http
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      wildcardPolicy: None
