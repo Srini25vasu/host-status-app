@@ -34,9 +34,60 @@ export const routes: Routes = [
   { path: 'memory-leak', component: TakeUntilLeakChildComponent },
   { path: 'http-resource', component: HttpResourceComponent },
   { path: 'signals', component: DemoComponent },
-  { path: 'vehicles', component: VehiclesComponent },
-  { path: 'vehicles/create', component: VehicleCreateComponent },
-  { path: 'vehicles/edit/:id', component: VehicleEditComponent },
+  { path: 'vehicles',
+    component: VehiclesComponent,
+    data: {
+      breadcrumb: [
+        {
+          label: 'Vehicles',
+          url: '/vehicles',
+          active: true,
+          class: 'breadcrumb-item active'
+        }
+      ]
+    }
+
+  },
+  {
+    path: 'vehicles/create',
+    component: VehicleCreateComponent,
+    data: {
+      breadcrumb: [
+        {
+          label: 'Vehicles',
+          url: '/vehicles',
+          active: false,
+          class: 'breadcrumb-item'
+        },
+        {
+          label: 'Create',
+          url: '/vehicles/create',
+          active: true,
+          class: 'breadcrumb-item active'
+        }
+      ]
+    }
+  },
+  {
+    path: 'vehicles/edit/:id',
+    component: VehicleEditComponent,
+    data: {
+      breadcrumb: [
+        {
+          label: 'Vehicles',
+          url: '/vehicles',
+          active: false,
+          class: 'breadcrumb-item'
+        },
+        {
+          label: 'Edit',
+          url: '/vehicles/edit/:id',
+          active: true,
+          class: 'breadcrumb-item active'
+        }
+      ]
+    }
+  },
   { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: '/home' }
 ];

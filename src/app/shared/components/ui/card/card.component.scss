@@ -1,9 +1,3 @@
-// Custom wrapper to center and size the card while preserving Bootstrap styles
-:host {
-  display: block;
-  width: 70%;
-  margin: 2rem auto;
-}
 
 // Enhance Bootstrap's card styles without overriding them
 .card {
