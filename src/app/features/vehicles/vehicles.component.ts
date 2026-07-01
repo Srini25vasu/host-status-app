@@ -8,12 +8,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 import { ToasterComponent } from '../../shared/components/ui/toaster/toaster.component';
-import { BreadcrumbComponent } from "../../components/ui/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-vehicles',
   standalone: true,
-  imports: [CommonModule, CardComponent, ReactiveFormsModule, ToasterComponent, BreadcrumbComponent],
+  imports: [CommonModule, CardComponent, ReactiveFormsModule, ToasterComponent],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.scss'
 })

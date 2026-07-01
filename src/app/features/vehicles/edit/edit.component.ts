@@ -5,10 +5,11 @@ import { CardComponent } from "../../../shared/components/ui/card/card.component
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleStore } from '../../../store/vehicle-store';
 import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { BreadcrumbComponent } from "../../../components/ui/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-edit',
-  imports: [CardComponent],
+  imports: [CardComponent, BreadcrumbComponent],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })

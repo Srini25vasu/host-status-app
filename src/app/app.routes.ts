@@ -36,16 +36,6 @@ export const routes: Routes = [
   { path: 'signals', component: DemoComponent },
   { path: 'vehicles',
     component: VehiclesComponent,
-    data: {
-      breadcrumb: [
-        {
-          label: 'Vehicles',
-          url: '/vehicles',
-          active: true,
-          class: 'breadcrumb-item active'
-        }
-      ]
-    }
 
   },
   {

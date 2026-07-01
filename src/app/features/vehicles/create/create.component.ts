@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vehicle } from '../../../models/vehicle.model';
+import { BreadcrumbComponent } from "../../../components/ui/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, BreadcrumbComponent],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss'
 })
